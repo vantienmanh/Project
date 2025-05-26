@@ -75,6 +75,30 @@ public:
 	{
 		return danhgia;
 	}
+	int getKynanggiaotiep()
+	{
+		return ky_nang_giao_tiep;
+	}
+	int getHieusuatcongviec()
+	{
+		return hieu_suat_cong_viec;
+	}
+	int getThaidolamviec()
+	{
+		return thai_do_lam_viec;
+	}
+	int getTuanthuquydinh()
+	{
+		return tuan_thu_quy_dinh;
+	}
+	int getDonggopsangtao()
+	{
+		return dong_gop_sang_tao;
+	}
+	int getTinhthantrachnhiem()
+	{
+		return tinh_than_trach_nhiem;
+	}
 	friend void nhapChucVu(Nhanvien& a)
 	{
 		cout << " chuc vu : ";
@@ -336,30 +360,30 @@ public:
 	void tongdiem(Nhanvien& a)
 	{
 		a.diem = a.diem + a.hieu_suat_cong_viec * 2 + a.tuan_thu_quy_dinh * 2 + a.ky_nang_giao_tiep + a.dong_gop_sang_tao + a.thai_do_lam_viec + a.tinh_than_trach_nhiem;
-	}
+	} 
 	void DanhGia(Nhanvien& a)
 	{
 		if (a.diem > 90 && a.diem <= 100)
 		{
-			a.danhgia = "Nhan vien xuat sac. ";
+			a.danhgia = " Xuat sac ";
 		}
 		else if (a.diem > 85 && a.diem <= 90)
 		{
-			a.danhgia = "Nhan vien gioi. ";
+			a.danhgia = " Gioi ";
 		}
 		else if (a.diem > 80 && a.diem <= 85)
 		{
-			a.danhgia = "Nhan vien kha. ";
+			a.danhgia = " Kha ";
 		}
 		else if (a.diem > 70 && a.diem <= 80)
 		{
-			a.danhgia = "Nhan vien trung binh. ";
+			a.danhgia = " Trung binh ";
 		}
 		else
 		{
-			a.danhgia = "Nhan vien yeu. ";
+			a.danhgia = " Yeu ";
 		}
-	}
+	} 
 	void thong_tin(Nhanvien a[100], int M)
 	{
 		for (int i = 0; i < M; i++)
@@ -427,13 +451,29 @@ int main()
 				cin >> chon;
 				if (chon == 1)
 				{
-					// Gán thông tin cho 3 nhân viên có sẵn trong công ty .
-					employes[99].thong_tin(employes, m);
-					// Danh sách  3 nhân viên có sẵn .
-					for (int i = 0; i < m; i++)
+					int suluachon;
+					cout << "(1) khi vao muc nay dau tien or (0) khi vao muc nay sau lan dau: ";
+					cin >> suluachon;
+					if (suluachon == 0)
 					{
-						cout << "0" << i + 1;
-						cout << employes[i];
+
+					}
+					else if (suluachon == 1)
+					{
+						employes[99].thong_tin(employes, m);  // Danh sách nhân viên ban đầu. 
+					}
+					cout << " Danh sach nhan vien :" << endl;
+					cout << left
+						<< setw(5) << "STT"
+						<< setw(20) << "Ho va ten"
+						<< setw(20) << "Email"
+						<< setw(30) << "Chuc vu" << endl;
+					for (int i = 0; i < (m + n); i++)
+					{
+						cout << setw(5) << (i + 1)
+							<< setw(20) << employes[i].getHoten()
+							<< setw(20) << employes[i].getEmail()
+							<< setw(30) << employes[i].getChucvu() << endl;
 					}
 					// Thêm nhân viên .
 					int bam;
@@ -446,7 +486,7 @@ int main()
 						cin >> n;
 						for (int i = m; i < (m + n); i++)
 						{
-							cout << "ma: 0" << i + 1 << endl;
+							cout << "ma: " << i + 1 << endl;
 							cin >> employes[i];
 						}
 					}
@@ -483,13 +523,21 @@ int main()
 							break;
 						}
 					}
-					cout << "\nDANH SACH SAU KHI XOA:" << endl;
+					cout << "\nDANH SACH SAU KHI CHINH SUA:" << endl;
+					cout << left
+						<< setw(5) << "STT"
+						<< setw(20) << "Ho va ten"
+						<< setw(20) << "Email"
+						<< setw(30) << "Chuc vu" << endl;
 					for (int i = 0; i < (m + n); i++)
 					{
-						cout << "0" << i + 1 << employes[i];
+						cout << setw(5) << (i + 1)
+							<< setw(20) << employes[i].getHoten()
+							<< setw(20) << employes[i].getEmail()
+							<< setw(30) << employes[i].getChucvu() << endl;
 					}
 					int X;
-					cout << " Bam (1) thoat chuong trinh or (0) tiep tuc: ";
+					cout << " Bam (1) thoat tai khoan or (0) tiep tuc: ";
 					cin >> X;
 					if (X == 1)
 					{
@@ -533,7 +581,7 @@ int main()
 						{
 							if (employes[i].getChucvu() == find1)
 							{
-								cout << "0" << i + 1;
+								cout << i + 1;
 								cout << employes[i];
 								xem_xet = true;
 								cout << endl;
@@ -554,7 +602,7 @@ int main()
 							for (int i = m; i < (m + n); i++)
 							{
 								// Nhập chức vụ cho nhân viên mới .
-								cout << "ma: 0" << i + 1;
+								cout << "ma: " << i + 1;
 								xuat(employes[i]);
 								nhapChucVu(employes[i]);
 							}
@@ -602,7 +650,7 @@ int main()
 					}
 					for (int i = 0; i < m + n; i++)
 					{
-						cout << "0" << i + 1;
+						cout  << i + 1;
 						cout << employes[i];
 						cout << endl;
 					}
@@ -615,7 +663,7 @@ int main()
 						{
 							if (choice == i && i < m)
 							{
-								cout << "0" << i + 1;
+								cout  << i + 1;
 								cout << employes[i];
 								cout << endl;
 								cout << " Duoc giao do an ." << endl;
@@ -625,7 +673,7 @@ int main()
 							}
 							else if (choice == i && i >= m) // i chạy qua các nhân viên mới 
 							{
-								cout << "0" << i + 1;
+								cout  << i + 1;
 								cout << employes[i];
 								cout << endl;
 								break;
@@ -684,7 +732,7 @@ int main()
 							{
 								for (int i = 0; i < m + n; i++)
 								{
-									cout << "0" << i + 1;
+									cout  << i + 1;
 									cout << employes[i];
 								}
 								int choice;
@@ -694,7 +742,7 @@ int main()
 								{
 									if (choice == i && i < m)
 									{
-										cout << "0" << i + 1;
+										cout  << i + 1;
 										cout << employes[i];
 										cin.ignore();
 										string nhanxet;
@@ -710,7 +758,7 @@ int main()
 									}
 									else if (choice == i && i >= m) // i chạy qua các nhân viên mới  
 									{
-										cout << "0" << i + 1;
+										cout  << i + 1;
 										cout << employes[i] << "; chua duoc danh gia nhan vien nay." << endl;
 										employes[i].getDiem();
 									}
@@ -741,17 +789,12 @@ int main()
 						cout << " BAN LA QUAN LY ." << endl;
 						for (int i = 0; i < m; i++)
 						{
-							cout << "0" << i + 1;
+							cout << i + 1;
 							cout << employes[i];
 							cout << endl;
 							employes[i].diemquanly(employes[i]);
 							cout << endl;
 							employes[i].tongdiem(employes[i]);
-							cout << endl;
-							employes[i].DanhGia(employes[i]);
-							cout << "0" << i + 1;
-							cout << employes[i] << " : ";
-							cout << employes[i].getDanhgia();
 							cout << endl;
 						}
 						cout << endl;
@@ -768,6 +811,30 @@ int main()
 						}
 						delete[] nhanxet;
 						nhanxet = nullptr;
+					}
+					cout << left
+						<< setw(5) << "STT"
+						<< setw(15) << "Ho va ten"
+						<< setw(15) << "Email"
+						<< setw(30) << "Chuc vu"
+						<< setw(10) << "K.N.G.T"
+						<< setw(10) << "H.S.C.V"
+						<< setw(10) << "T.D.L.V"
+						<< setw(10) << "T.T.Q.D"
+						<< setw(10) << "D.G.S.T"
+						<< setw(10) << "T.T.T.N" << endl;
+					for (int i = 0; i < (n + m); i++)
+					{
+						cout << setw(5) << (i + 1)
+							<< setw(15) << employes[i].getHoten()
+							<< setw(15) << employes[i].getEmail()
+							<< setw(30) << employes[i].getChucvu()
+							<< setw(10) << employes[i].getKynanggiaotiep()
+							<< setw(10) << employes[i].getHieusuatcongviec()
+							<< setw(10) << employes[i].getThaidolamviec()
+							<< setw(10) << employes[i].getTinhthantrachnhiem()
+							<< setw(10) << employes[i].getDonggopsangtao()
+							<< setw(10) << employes[i].getTinhthantrachnhiem() << endl;
 					}
 					int X1;
 					cout << " Bam 1: de thoat tai khoan or 0: de tiep tuc  ";
@@ -800,6 +867,7 @@ int main()
 					cout << left
 						<< setw(5) << "STT"
 						<< setw(20) << "Ho va ten"
+						<< setw(20)<<"Email"
 						<< setw(30) << "Chuc vu"
 						<< setw(10) << "Diem"
 						<< setw(20) << "Danh gia" << endl;
@@ -809,6 +877,7 @@ int main()
 						employes[i].DanhGia(employes[i]);
 						cout << setw(5) << (i + 1)
 							<< setw(20) << employes[i].getHoten()
+							<< setw(20) << employes[i].getEmail()
 							<< setw(30) << employes[i].getChucvu()
 							<< setw(10) << employes[i].getDiem()
 							<< setw(20) << employes[i].getDanhgia() << endl;
@@ -861,16 +930,37 @@ int main()
 				string timten;
 				cout << "ten :";
 				getline(cin, timten);
+				cout << endl;
+				cout << left
+					<< setw(5) << "STT"
+					<< setw(20) << "Ho va ten"
+					<< setw(20) << "Email"
+					<< setw(30) << "Chuc vu"
+					<< setw(10) << "Diem"
+					<< setw(20) << "Danh gia" << endl;
 				for (int i = 0; i < m + n; i++)
 				{
-					cout << "0" << i + 1;
-					cout << employes[i];
-
 					if (timten == employes[i].getHoten())
 					{
-						cout << "----##";
+						employes[i].DanhGia(employes[i]);
+						cout << setw(5) << (i + 1)
+							<< setw(20) << employes[i].getHoten()
+							<< setw(20) << employes[i].getEmail()
+							<< setw(30) << employes[i].getChucvu()
+							<< setw(10) << employes[i].getDiem()
+							<< setw(20) << employes[i].getDanhgia() << "<<<-##-";
+						cout << endl;
 					}
-					cout << endl;
+					else
+					{ 
+						employes[i].DanhGia(employes[i]);
+						cout << setw(5) << (i + 1)
+							<< setw(20) << employes[i].getHoten()
+							<< setw(20) << employes[i].getEmail()
+							<< setw(30) << employes[i].getChucvu()
+							<< setw(10) << employes[i].getDiem()
+							<< setw(20) << employes[i].getDanhgia() << endl;
+					}
 				}
 				int X;
 				cout << " Bam 1:  de thoat tai khoan or 0: de tiep tuc  ";
